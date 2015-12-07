@@ -9,7 +9,17 @@ router.get('/', function(req, res, next) {
 /* GET products listing. */
 router.get('/products', function(req, res, next) {
     var productsHandler = require( '../model/products' );
-    res.send('product page');
+    res.render('products', { title: 'Products' });
+});
+
+/* GET orders listing. */
+router.get('/orders', function(req, res, next) {
+    res.render('orders', { title: 'Orders' });
+});
+
+/* GET users listing. */
+router.get('/users', function(req, res, next) {
+    res.render('users', { title: 'Users' });
 });
 
 /* GET one product. */
