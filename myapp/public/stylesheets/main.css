@@ -1,3 +1,4 @@
-body {
-    background-color: aquamarine;
+.product-form .product-image {
+	width: 90%;
+	margin: 5%;
 }
