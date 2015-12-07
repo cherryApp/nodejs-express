@@ -21,7 +21,11 @@ router.get('/orders', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
-    res.render('users', { title: 'Users' });
+    var userHandler = require( '../model/user' );
+    userHandler.getAll( {}, function(data) {
+      if ( !data ) data = [];
+      res.render('users', { title: 'Users', users: data });      
+    })
 });
 
 /* GET new products. */

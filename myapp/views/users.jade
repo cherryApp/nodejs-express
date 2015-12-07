@@ -10,10 +10,22 @@ block content
               h1.page-header=title
           .row
             .col-xs-12
-              table.table-striped
+              table.table-striped.table
                 thead
                   tr
                     th Name
                     th Email
                     th Gender
                     th Address
+                tbody
+                  each row in users
+                    tr
+                      td=row.name
+                      td=row.email
+                      td=row.gender 
+                      td=row.address
+                      
+                      
+                      
+                      
+                      
