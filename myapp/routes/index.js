@@ -28,24 +28,20 @@ router.get('/products/new', function(req, res, next) {
       {'label': 'Name', 'name': 'name'},
       {'label': 'Price', 'name': 'price'},
       {'label': 'Manufacturer', 'name': 'manufacturer'},
-      {'label': 'In Stock', 'name': 'instock'}
+      {'label': 'In Stock', 'name': 'instock'},
+      {'label': 'Image', 'name': 'image'}
     ];
     res.render(
       'product_new',
       {title: 'New Product', formFields: formFields}
     );
-  
-    /*var productsHandler = require( '../model/products' );
-    var product = {
-        name: "Vasaló",
-        price: 12555,
-        manufacturer: "Bosch",
-        image: "http://www.redo.hu/images/stories/virtuemart/product/bosch_vasalo_tda503011p_5177d013e1af4.jpg",
-        instock: 12
-    };
-    productsHandler.insert( product, function(data) {
-        res.send('product inserted: '+JSON.stringify(data) );        
-    } );*/
+});
+
+router.post( '/product/save-new', function( req, res ) {
+    var productsHandler = require( '../model/products' );
+    productsHandler.insert( req.body, function(data) {
+      res.redirect( '/products' );      
+    } );
 });
 
 /* GET one product. */

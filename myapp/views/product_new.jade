@@ -13,13 +13,11 @@ block content
               .panel.panel-primary
                 .panel-heading New Product
                 .panel-body
-                  form(role='form')
+                  form(role='form' method='post' action='/product/save-new')
                     each row in formFields
                       .form-group
                         label=row.label
                         input.form-control(name=row.name)
-                    .form-group
-                      img.new-product-image
                     .form-group
                       button.btn.btn-success Save New
                     
