@@ -30,7 +30,7 @@ var getOne = function( where, callBack ) {
 // Összes dokumentum lekérése.
 var getAll = function( where, callBack ) {
 
-  Product.findOne( where, function( err, docs ) {
+  Product.find( where, function( err, docs ) {
     callBack( docs );
   } );
 

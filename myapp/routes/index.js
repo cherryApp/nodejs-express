@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
 /* GET products listing. */
 router.get('/products', function(req, res, next) {
     var productsHandler = require( '../model/products' );
-    res.render('products', { title: 'Products' });
+    productsHandler.getAll( {}, function(data) {
+      res.render('products', { title: 'Products', products: data });      
+    });
 });
 
 /* GET orders listing. */
