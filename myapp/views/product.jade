@@ -32,7 +32,8 @@ block content
                           label(for='product-instock') In Stock
                           input.form-control(type='text' name='instock' value=data.instock)
                         .form-group
-                          input(type='hidden' name='image' value=data.image)
+                          label(for='image') In Stock
+                          input.form-control(name='image' value=data.image)
                           img.product-image(src=data.image)
                         .form-group
                           button.btn.btn-success Save

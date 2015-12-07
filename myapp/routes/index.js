@@ -25,17 +25,17 @@ router.get('/users', function(req, res, next) {
 });
 
 /* GET new products. */
+var productFields = [
+  {'label': 'Name', 'name': 'name'},
+  {'label': 'Price', 'name': 'price'},
+  {'label': 'Manufacturer', 'name': 'manufacturer'},
+  {'label': 'In Stock', 'name': 'instock'},
+  {'label': 'Image', 'name': 'image'}
+];
 router.get('/products/new', function(req, res, next) {
-    var formFields = [
-      {'label': 'Name', 'name': 'name'},
-      {'label': 'Price', 'name': 'price'},
-      {'label': 'Manufacturer', 'name': 'manufacturer'},
-      {'label': 'In Stock', 'name': 'instock'},
-      {'label': 'Image', 'name': 'image'}
-    ];
     res.render(
       'product_new',
-      {title: 'New Product', formFields: formFields}
+      {title: 'New Product', formFields: productFields}
     );
 });
 
@@ -62,8 +62,15 @@ router.post('/products/update/:id', function(req, res, next) {
     var productsHandler = require( '../model/products' );
 
     productsHandler.update( {'_id': req.params.id}, req.body, function(data) {
-        res.redirect('/products/'+req.params.id);             
+        res.redirect('/products');             
     } );
+});
+
+router.get( '/products/delete/:id', function( req, res ) {
+  var productsHandler = require( '../model/products' );
+  productsHandler.remove( {'_id': req.params.id}, function() {
+    res.redirect('/products'); 
+  });
 });
 
 

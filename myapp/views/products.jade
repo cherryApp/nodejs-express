@@ -19,6 +19,7 @@ block content
                     th Manufacturer
                     th Image
                     th In Stock
+                    th actions
                 tbody
                   each row in products
                     tr
@@ -28,6 +29,10 @@ block content
                       td
                         img.product-list-image(src=row.image)
                       td=row.instock
+                      td
+                        .btn-group
+                          a.btn.btn-primary(href='/products/'+row._id) show
+                          a.btn.btn-warning(href='/products/delete/'+row._id) delete
                     
                     
                     
