@@ -22,6 +22,32 @@ router.get('/users', function(req, res, next) {
     res.render('users', { title: 'Users' });
 });
 
+/* GET new products. */
+router.get('/products/new', function(req, res, next) {
+    var formFields = [
+      {'label': 'Name', 'name': 'name'},
+      {'label': 'Price', 'name': 'price'},
+      {'label': 'Manufacturer', 'name': 'manufacturer'},
+      {'label': 'In Stock', 'name': 'instock'}
+    ];
+    res.render(
+      'product_new',
+      {title: 'New Product', formFields: formFields}
+    );
+  
+    /*var productsHandler = require( '../model/products' );
+    var product = {
+        name: "Vasaló",
+        price: 12555,
+        manufacturer: "Bosch",
+        image: "http://www.redo.hu/images/stories/virtuemart/product/bosch_vasalo_tda503011p_5177d013e1af4.jpg",
+        instock: 12
+    };
+    productsHandler.insert( product, function(data) {
+        res.send('product inserted: '+JSON.stringify(data) );        
+    } );*/
+});
+
 /* GET one product. */
 router.get('/products/:id', function(req, res, next) {
     var productsHandler = require( '../model/products' );
@@ -42,19 +68,5 @@ router.post('/products/update/:id', function(req, res, next) {
     } );
 });
 
-/* GET new products. */
-router.get('/products/new', function(req, res, next) {
-    var productsHandler = require( '../model/products' );
-    var product = {
-        name: "Vasaló",
-        price: 12555,
-        manufacturer: "Bosch",
-        image: "http://www.redo.hu/images/stories/virtuemart/product/bosch_vasalo_tda503011p_5177d013e1af4.jpg",
-        instock: 12
-    };
-    productsHandler.insert( product, function(data) {
-        res.send('product inserted: '+data );        
-    } );
-});
 
 module.exports = router;
