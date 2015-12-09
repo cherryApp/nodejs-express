@@ -9,14 +9,31 @@ try {
 }
 
 // Új model beállítása az adatbázis dokumentumokhoz.
-var User = mongoose.model('User',
-    {
+var userTemplate = {
         name: "String",
         email: "String",
         gender: "String",
         address: "String",
-        password: "String"
-    });
+        password: "String",
+        meta: "Object"
+    };
+var User = mongoose.model( 'User', userTemplate );
+
+/*
+// Teszt user létrehozása.
+var testUser = new User( {
+        name: "John Doe",
+        email: "john.doe@gmail.com",
+        gender: "male",
+        address: "42514 New York, Manhattan Boulevard 14.",
+        password: "johnd",
+        meta: {
+          role: 1,
+          lastLogin: new Date()
+        }
+} );
+testUser.save();
+*/
 
 // Egy dokumentum lekérése.
 var getOne = function( where, callBack ) {
@@ -84,7 +101,8 @@ module.exports = {
   "getAll": getAll,
   "update": update,
   "insert": insert,
-  "remove": remove
+  "remove": remove,
+  "template": userTemplate
 };
 
 

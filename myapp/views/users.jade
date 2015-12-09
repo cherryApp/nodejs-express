@@ -17,6 +17,7 @@ block content
                     th Email
                     th Gender
                     th Address
+                    th actions
                 tbody
                   each row in users
                     tr
@@ -24,6 +25,10 @@ block content
                       td=row.email
                       td=row.gender 
                       td=row.address
+                      td 
+                        .btn-group
+                          a.btn.btn-primary(href='/users/'+row._id) show
+                          a.btn.btn-warning(href='/users/delete/'+row._id) delete
                       
                       
                       

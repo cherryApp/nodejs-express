@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  #wrapper
+      // Page Content
+      #page-wrapper
+        .container-fluid
+          .row
+            .col-lg-12
+              h1.page-header=data.name
+          .row
+            .col-lg-6
+              .panel.panel-primary
+                .panel-heading
+                  .row
+                    .col-xs-12
+                      h3 Details
+                .panel-body
+                  .row
+                    .col-xs-12
+                      form.product-form(role='form' method='post' action='/users/update/'+data._id)
+                        each row, index in fields
+                          .form-group
+                            label=index
+                            input.form-control(type='text' name=index value=data[index])
+                        .form-group
+                          label Role
+                          select.form-control
+                            each row, index in ['admin', 'user']
+                              option(value=(index+1) selected=(index+1 == data.meta.role))=row
+                            
+                        .form-group
+                          button.btn.btn-success Save
+                          
+                          
+                          
+                          
+                          
+                          

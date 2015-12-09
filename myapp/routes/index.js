@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var sessionHandler = require( '../controllers/session' );
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,8 +26,26 @@ router.get('/users', function(req, res, next) {
     userHandler.getAll( {}, function(data) {
       if ( !data ) data = [];
       res.render('users', { title: 'Users', users: data });      
-    })
+    } );
 });
+
+router.get( '/users/:id', function( req, res, next ) {
+    var userHandler = require( '../model/user' );
+    var fields = userHandler.template;
+    delete fields.meta;
+    userHandler.getOne( { '_id': req.params.id }, function(data) {
+      if ( !data ) data = [];
+      res.render('one-user', { 'fields': fields, 'data': data });      
+    } );
+} );
+
+router.post( '/users/update/:id', function( req, res, next ) {
+    var userHandler = require( '../model/user' );
+    userHandler.update( {'_id': req.params.id}, req.body, function(data) {
+      if ( !data ) data = [];
+      res.redirect( '/users' );     
+    } );
+} );
 
 /* GET new products. */
 var productFields = [
