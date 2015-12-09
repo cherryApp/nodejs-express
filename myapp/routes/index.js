@@ -2,6 +2,33 @@ var express = require('express');
 var router = express.Router();
 var sessionHandler = require( '../controllers/session' );
 
+// Session ellenőrzése.
+router.all( "/*", function( req, res, next ) {
+    if ( req.url.indexOf( "/login" ) !==  -1 ) {
+      next();
+      return;
+    }
+    sessionHandler.getSession( req, function( err, session ) {
+        if ( err || session === null ) res.redirect( "/login" );
+        else next();
+    } );
+} );
+
+// Login oldal.
+router.get( "/login", function( req, res, next ) {
+    res.render('login', { title: 'Login' });
+} );
+
+// Login ellenőrzése.
+router.post( "/login/start", function( req, res, next ) {
+    sessionHandler.loginUser( req, function( err, session ) {
+        if ( err ) res.redirect( "/login" );
+        else {
+            res.redirect( "/" );
+        }
+    })
+} );
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Dashboard' });
